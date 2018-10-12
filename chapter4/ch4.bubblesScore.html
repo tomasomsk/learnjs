@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Buuble Score</title>
+    <meta charset="utf-8">
+    <script>
+
+        var solutionsNumbers;
+        var max;
+        var inputData = [60, 50, 60, 58, 54, 54,
+            58, 50, 52, 54, 48, 69,
+            34, 55, 51, 52, 44, 51,
+            69, 64, 66, 55, 52, 61,
+            46, 31, 57, 52, 44, 18,
+            41, 53, 55, 61, 51, 44];
+        var costs = [.25, .27, .25, .25, .25, .25,
+            .33, .31, .25, .29, .27, .22,
+            .31, .25, .25, .33, .21, .29,
+            .21, .25, .28, .25, .24, .22,
+            .20, .25, .30, .25, .24, .25,
+            .25, .25, .27, .25, .26, .29];
+
+        function printAllResultsAndGetHighScore(scores) {
+            var result = 0;
+            for (var i = 0; i < scores.length; i++) {
+                console.log('Bubble solution #' + i + ' score: ' + scores[i] + '\n');
+                if (scores[i] > result) {
+                    result = scores[i];
+                }
+            }
+            return result;
+        }
+
+        function getBestSolutions(scores) {
+            var result = [];
+            for (var i = 0; i < scores.length; i++) {
+                if (scores[i] == max) {
+                    result.push(i);
+                }
+            }
+            return result;
+        }
+
+        function getMinCostBublePosition(solutionNumbers, scores, costs) {
+            var minCost = Number.MAX_SAFE_INTEGER;
+            var minCostPosition;
+
+            for (var i = 0; i < solutionsNumbers.length; i++) {
+                if (costs[solutionsNumbers[i]] < minCost) {
+                    minCost = costs[solutionsNumbers[i]];
+                    minCostPosition = [solutionsNumbers[i]];
+                }
+            }
+            return minCostPosition;
+        }
+
+        max = printAllResultsAndGetHighScore(inputData);
+        solutionsNumbers = getBestSolutions(inputData);
+
+        console.log('Bubbles tests:' + inputData.length + '\n');
+        console.log('Highest bubble score:' + max + '\n');
+        console.log('Solutions with highest score: ' + solutionsNumbers);
+
+        console.log('Solution # with best cost: ' + getMinCostBublePosition(solutionsNumbers, inputData, costs));
+
+    </script>
+</head>
+<body></body>
+</html>
