@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> Image Guess </title>
+    <style>
+        body {
+            margin: 20px;
+        }
+
+        img {
+            margin: 20px;
+        }
+    </style>
+    <script>
+        window.onload = init;
+
+        function init() {
+            var image = document.getElementsByTagName("img");
+            for (var i = 0; i < image.length; i++) {
+                image[i].onmouseover = showAnswer;
+                image[i].onmouseout = showBlur;
+            }
+        }
+
+        function showAnswer(eventInf) {
+            var img = eventInf.target;
+            img.src = eventInf.target.id + '.png';
+        }
+
+        function showBlur(bluredSrc) {
+            bluredSrc.target.src = bluredSrc.target.id + 'blur.png';
+        }
+    </script>
+</head>
+<body>
+<img id="zero" src="../out/artifacts/headfirstjs_war_exploded/zeroblur.png">
+<img id="zero1" src="../out/artifacts/headfirstjs_war_exploded/zero1blur.png">
+<img id="zero2" src="../out/artifacts/headfirstjs_war_exploded/zero2blur.png">
+</body>
+</html>

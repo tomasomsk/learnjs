@@ -30,13 +30,18 @@ var model = {
             var ship = this.ships[i];
             var index = ship.locations.indexOf(guess);
             if (index >= 0) {
-                ship.hits[index] = 'hit';
-                view.displayHit(guess);
-                view.displayMessage("HIT!");
-                if (this.isSunk(ship)) {
-                    this.shipsSunk++;
+                if (ship.hits[index] !== 'hit') {
+                    ship.hits[index] = 'hit';
+                    view.displayHit(guess);
+                    view.displayMessage("HIT!");
+                    if (this.isSunk(ship)) {
+                        this.shipsSunk++;
+                    }
+                    return true;
+                } else {
+                    alert('You have already hit in this coordinate!');
+                    return;
                 }
-                return true;
             }
         }
         view.displayMiss(guess);
@@ -70,8 +75,8 @@ var model = {
             row = Math.floor(Math.random() * this.boardSize);
             col = Math.floor(Math.random() * (this.boardSize - this.shipLength));
         } else {
-            row = Math.floor(Math.random() * this.boardSize - this.shipLength);
-            col = Math.floor(Math.random() * (this.boardSize));
+            row = Math.floor(Math.random() * (this.boardSize - this.shipLength));
+            col = Math.floor(Math.random() * this.boardSize);
         }
         var newShipLocations = [];
         for (var i = 0; i < this.shipLength; i++) {
@@ -155,5 +160,6 @@ function handleKeyPress(e) {
 
 window.onload = init;
 
+model.genShipLoc();
 
 
